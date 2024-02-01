@@ -1,0 +1,16 @@
+name: mRPolice
+version: '${project.version}'
+main: me.milaky.mrpolice.MRPolice
+api-version: '1.16'
+commands:
+  wanted:
+    usage: /<command>
+  prison:
+    usage: /<command>
+  handcuffs:
+    usage: /<command>
+Permission:
+  police.policeman:
+    default: op
+  police.admin:
+    default: op

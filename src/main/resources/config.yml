@@ -1,0 +1,28 @@
+ArrestTime:
+  1: 200 #Seconds
+  2: 540
+  3: 670
+  4: 800
+  5: 900
+Settings:
+  Prison:
+  AfterPrison:
+  Handcuffs:
+    Name: "&a&lHandcuffs"
+    CustomModelData: 140
+Messages:
+  HandcuffNotify: "&a&lmPolice | &fYou were handcuffed."
+  InteractErrorHandcuffs: "&a&lmPolice | &fYou can't interact with it while you're handcuffed."
+  HandcuffsGot: "&a&lmPolice | &fYou got handcuffs."
+  Handcuffed: "&a&lmPolice | &fYou handcuffed a player"
+  WantedList:
+    - "&6&lWantedList"
+    - "%wantedlist%"
+  WantedGet: "&a&lmPolice | &fPlayer has %wanted% level"
+  WantedSet: "&a&lmPolice | &fPoliceman: %player% set wanted level for %target%. New wanted lvl: %wantedlvl%"
+  ArrestedPlayer: "&a&lmPolice | &fPoliceman: %player% arrested %target%."
+  SetPrison: "&a&lmPolice | &fHave you set the location of the prison"
+  SetAfterPrison: "&a&lmPolice | &fYou have set the location after serving your prison sentence."
+
+
+
