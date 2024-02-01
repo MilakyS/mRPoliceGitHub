@@ -22,7 +22,7 @@ import org.bukkit.util.Vector;
 import java.util.HashMap;
 
 public final class MRPolice  extends JavaPlugin implements Listener {
-    public MRPolice instance;
+    public static MRPolice instance;
     public DataManager data;
     public HashMap<Player, Integer> wanted = new HashMap<>();
     public HashMap<Player, Player> handcuffs = new HashMap<>();
@@ -38,6 +38,7 @@ public final class MRPolice  extends JavaPlugin implements Listener {
         this.getServer().getPluginCommand("prison").setExecutor(new prison(this));
         this.getServer().getPluginCommand("handcuffs").setExecutor(new handcuffs(this));
         this.getServer().getPluginManager().registerEvents(this, this);
+        Metrics metrics = new Metrics(this, 20873);
     }
     @EventHandler
     public void interact(PlayerInteractEntityEvent event){
@@ -92,7 +93,7 @@ public final class MRPolice  extends JavaPlugin implements Listener {
         }
     }
 
-    public MRPolice getInstance() {
+    public static MRPolice getInstance() {
         return instance;
     }
 

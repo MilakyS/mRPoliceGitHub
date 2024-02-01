@@ -33,7 +33,7 @@ public class prison implements CommandExecutor {
                     dataManager.setWanted(target, 0);
                     this.plugin.wanted.remove(target);
                     dataManager.PrisonTimer(target);
-                    String message = this.plugin.getConfig().getString("Messages.ArrestedPlayer").replace("&", "§").replace("%player%", p.getName().replace("%target%", target.getName()).replace("&", "§"));
+                    String message = this.plugin.getConfig().getString("Messages.ArrestedPlayer").replace("&", "§").replace("%target%", target.getName()).replace("%player%", p.getName()).replace("&", "§");
                     Bukkit.broadcast(message, "police.policeman");
                 }
             }

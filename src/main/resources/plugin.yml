@@ -1,5 +1,5 @@
 name: mRPolice
-version: '${project.version}'
+version: 0.1
 main: me.milaky.mrpolice.MRPolice
 api-version: '1.16'
 commands:
