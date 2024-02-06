@@ -1,10 +1,11 @@
 package me.milaky.mrpolice.Events;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class PlayerArrestedEvent extends Event {
+public class PlayerArrestedEvent extends Event implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
     private final Player player;
     private final Player target;
@@ -35,15 +36,12 @@ public class PlayerArrestedEvent extends Event {
     public Player getPoliceMan(){
         return this.target;
     }
-    public void setCancelled(boolean setCancelled){
-        if(setCancelled){
-            isCancelled = true;
-        }
-        else{
-            isCancelled = false;
-        }
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        this.isCancelled = isCancelled;
     }
-    public boolean isCancelled(){
-        return isCancelled;
+    @Override
+    public boolean isCancelled() {
+        return this.isCancelled;
     }
 }

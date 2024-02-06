@@ -1,10 +1,11 @@
 package me.milaky.mrpolice.Events;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class PlayerWantedSet extends Event {
+public class PlayerWantedSet extends Event implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
     private final Player player;
     private final Player target;
@@ -40,16 +41,13 @@ public class PlayerWantedSet extends Event {
     public int getSettledWantedLvl(){
         return Wanted;
     }
-    public void setCancelled(boolean setCancelled){
-        if(setCancelled){
-            isCancelled = true;
-        }
-        else{
-            isCancelled = false;
-        }
-    }
+    @Override
     public boolean isCancelled(){
-        return isCancelled;
+        return this.isCancelled;
+    }
+    @Override
+    public void setCancelled(boolean isCancelled) {
+        this.isCancelled = isCancelled;
     }
 
 }

@@ -5,14 +5,17 @@ import me.milaky.mrpolice.Commands.prison;
 import me.milaky.mrpolice.Commands.wanted;
 import me.milaky.mrpolice.Data.DataManager;
 import me.milaky.mrpolice.Events.PlayerWantedSet;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,13 +49,21 @@ public final class MRPolice  extends JavaPlugin implements Listener {
         Player p = event.getPlayer();
         Player pl = (Player) event.getRightClicked();
         if(pl != null) {
-            if(item.getType() == Material.PAPER) {
-                ItemMeta itemMeta = item.getItemMeta();
-                if (itemMeta.getDisplayName().equals(this.getConfig().getString("Settings.Handcuffs.Name").replace("&", "§"))) {
-                    if (itemMeta.getCustomModelData() == this.getConfig().getInt("Settings.Handcuffs.CustomModelData")) {
-                            pl.sendMessage(this.getConfig().getString("Messages.HandcuffNotify").replace("&", "§"));
-                            handcuffs.put(p, pl);
-                            p.sendMessage(this.getConfig().getString("Messages.Handcuffed").replace("&", "§"));
+            if(event.getHand() == EquipmentSlot.HAND) {
+                if (item.getType() == Material.PAPER) {
+                    ItemMeta itemMeta = item.getItemMeta();
+                    if (itemMeta.getDisplayName().equals(this.getConfig().getString("Settings.Handcuffs.Name").replace("&", "§"))) {
+                        if (itemMeta.getCustomModelData() == this.getConfig().getInt("Settings.Handcuffs.CustomModelData")) {
+                            if (handcuffs.get(p) != pl) {
+                                pl.sendMessage(this.getConfig().getString("Messages.HandcuffNotify").replace("&", "§"));
+                                handcuffs.put(p, pl);
+                                p.sendMessage(this.getConfig().getString("Messages.Handcuffed").replace("&", "§"));
+                            }
+                            else {
+                                p.sendMessage(this.getConfig().getString("Messages.HandcuffsTook").replace("&", "§"));
+                                handcuffs.remove(p, pl);
+                            }
+                        }
                     }
                 }
             }
@@ -73,6 +84,14 @@ public final class MRPolice  extends JavaPlugin implements Listener {
         if(handcuffs.containsValue(p)){
             p.sendMessage(this.getConfig().getString("Messages.InteractErrorHandcuffs").replace("&", "§"));
             e.setCancelled(true);
+        }
+    }
+    @EventHandler
+    public void onKill(PlayerDeathEvent e){
+        Player p = e.getEntity().getKiller();
+        if(!p.hasPermission("police.killbypass")) {
+            data.setWanted(p, data.getWanted(p) + 1);
+            Bukkit.broadcast(this.getConfig().getString("Messages.WanterForKill").replace("&", "§").replace("%player%", p.getName()).replace("%wantedlvl%", String.valueOf(data.getWanted(p))), "police.policeman");
         }
     }
 

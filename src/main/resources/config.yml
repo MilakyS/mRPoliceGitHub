@@ -23,6 +23,7 @@ Messages:
   ArrestedPlayer: "&a&lmPolice | &fPoliceman: %player% arrested %target%."
   SetPrison: "&a&lmPolice | &fHave you set the location of the prison"
   SetAfterPrison: "&a&lmPolice | &fYou have set the location after serving your prison sentence."
-
+  HandcuffsTook: "&a&lmPolice | &fYou took the handcuffs off the player"
+  WanterForKill: "&a&lmPolice | &fPlayer %player% did a crime. New wanted level: %wantedlvl%"
 
 

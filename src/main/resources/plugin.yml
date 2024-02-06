@@ -2,6 +2,7 @@ name: mRPolice
 version: 0.1
 main: me.milaky.mrpolice.MRPolice
 api-version: '1.16'
+author: Milaky
 commands:
   wanted:
     usage: /<command>
@@ -13,4 +14,6 @@ Permission:
   police.policeman:
     default: op
   police.admin:
+    default: op
+  police.killbypass:
     default: op

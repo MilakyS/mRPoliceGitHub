@@ -8,8 +8,13 @@ import org.bukkit.entity.Player;
 
 
 public class PoliceManager {
+    MRPolice plugin;
 
-    DataManager manager = MRPolice.getInstance().data;
+    public PoliceManager(MRPolice plugin){
+        this.plugin = plugin;
+    }
+
+    DataManager manager = this.plugin.data;
     public void setWanted(Player p, int WantedLevel){
         manager.setWanted(p, WantedLevel);
     }
