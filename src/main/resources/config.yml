@@ -10,6 +10,7 @@ Settings:
   Handcuffs:
     Name: "&a&lHandcuffs"
     CustomModelData: 140
+  HandcuffsBroke: true
 Messages:
   HandcuffNotify: "&a&lmPolice | &fYou were handcuffed."
   InteractErrorHandcuffs: "&a&lmPolice | &fYou can't interact with it while you're handcuffed."
@@ -24,6 +25,6 @@ Messages:
   SetPrison: "&a&lmPolice | &fHave you set the location of the prison"
   SetAfterPrison: "&a&lmPolice | &fYou have set the location after serving your prison sentence."
   HandcuffsTook: "&a&lmPolice | &fYou took the handcuffs off the player"
-  WanterForKill: "&a&lmPolice | &fPlayer %player% did a crime. New wanted level: %wantedlvl%"
+  WantedForKill: "&a&lmPolice | &fPlayer %player% did a crime. New wanted level: %wantedlvl%"
 
 

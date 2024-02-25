@@ -58,6 +58,9 @@ public final class MRPolice  extends JavaPlugin implements Listener {
                                 pl.sendMessage(this.getConfig().getString("Messages.HandcuffNotify").replace("&", "§"));
                                 handcuffs.put(p, pl);
                                 p.sendMessage(this.getConfig().getString("Messages.Handcuffed").replace("&", "§"));
+                                if(this.getConfig().getBoolean("Settings.HandcuffsBroke")) {
+                                    item.setDurability((short) (item.getDurability() - 1));
+                                }
                             }
                             else {
                                 p.sendMessage(this.getConfig().getString("Messages.HandcuffsTook").replace("&", "§"));
@@ -74,8 +77,12 @@ public final class MRPolice  extends JavaPlugin implements Listener {
         Player p = event.getPlayer();
         if(handcuffs.containsKey(p)){
             Player target = handcuffs.get(p);
-
-            target.setVelocity(target.getVelocity().add(p.getLocation().toVector().subtract(target.getLocation().toVector()).normalize().multiply(0.1)));
+            if(p.getVelocity().length() <= 0){
+                event.setCancelled(true);
+            }
+            else {
+                target.setVelocity(target.getVelocity().add(p.getLocation().toVector().subtract(target.getLocation().toVector()).normalize().multiply(0.1)));
+            }
         }
     }
     @EventHandler
@@ -91,7 +98,7 @@ public final class MRPolice  extends JavaPlugin implements Listener {
         Player p = e.getEntity().getKiller();
         if(!p.hasPermission("police.killbypass")) {
             data.setWanted(p, data.getWanted(p) + 1);
-            Bukkit.broadcast(this.getConfig().getString("Messages.WanterForKill").replace("&", "§").replace("%player%", p.getName()).replace("%wantedlvl%", String.valueOf(data.getWanted(p))), "police.policeman");
+            Bukkit.broadcast(this.getConfig().getString("Messages.WantedForKill").replace("&", "§").replace("%player%", p.getName()).replace("%wantedlvl%", String.valueOf(data.getWanted(p))), "police.policeman");
         }
     }
 

@@ -27,7 +27,7 @@ public class prison implements CommandExecutor {
             Player target = Bukkit.getPlayer(args[1]);
             if (target != null && dataManager.getWanted(target) > 0) {
                 PlayerArrestedEvent event = new PlayerArrestedEvent(target, p);
-                Bukkit.getPluginManager().callEvent(event);
+                Bukkit.getServer().getPluginManager().callEvent(event);
                 if (!event.isCancelled()) {
                     dataManager.setPrisonTime(target);
                     dataManager.setWanted(target, 0);
