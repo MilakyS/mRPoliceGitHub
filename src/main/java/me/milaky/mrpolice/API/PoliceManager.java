@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 public class PoliceManager {
 
-    DataManager manager = new DataManager(MRPolice.getInstance());
+    DataManager manager = ((DataManager) Bukkit.getServer().getPluginManager().getPlugin("mRPolice"));
     public void setWanted(Player p, int WantedLevel){
         manager.setWanted(p, WantedLevel);
     }
